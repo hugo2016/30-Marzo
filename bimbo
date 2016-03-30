@@ -86,3 +86,17 @@ estmult <- bimmult$seasonal#### asignamos la estacionalidad del modelo multiplic
 
 #### ahora para graficar la tendencia, estacionalidad... etc
 ts.plot(cbind(tendad, tendad * estadi), lty = 1:2, col= cbind(2,4))
+
+install.packages("XLConnect")
+require(XLConnect)
+library(XLConnect)
+wb<-loadWorkbook("C:\\Users\\SALA-C13\\Desktop\\practicabimbo.xls",create = TRUE) #Se creea el libro de Excel
+createSheet(wb,name="Tendencia adi") #Se crea la hoja de Excel
+writeWorksheet(wb,tendad,"Tendencia adi",startRow = 1,startCol =1,header = TRUE )
+createSheet(wb,name="Tendencia Mult")
+writeWorksheet(wb,tendmult,"Tendencia Mult",startRow = 1,startCol =1,header = TRUE )
+createSheet(wb,name="Estacionalidad mult")
+writeWorksheet(wb,estmult,"EStacionalidad mult",startRow = 1,startCol =1,header = TRUE )
+createSheet(wb,name="EStacionalidad adi")
+writeWorksheet(wb,estadi,"EStacionalidad adi",startRow = 1,startCol =1,header = TRUE )
+saveWorkbook(wb)
